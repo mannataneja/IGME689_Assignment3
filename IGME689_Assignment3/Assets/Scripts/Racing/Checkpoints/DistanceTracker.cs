@@ -22,14 +22,14 @@ public class DistanceTracker : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "checkpoint")
+        if(other.gameObject.tag == "checkpoint" || other.gameObject.tag == "finish")
         {
             if(checkpoint.checkpointDistance + 1000 == other.gameObject.GetComponent<Checkpoint>().checkpointDistance)
             {
                 checkpoint = other.gameObject.GetComponent<Checkpoint>();
                 checkpointDistance = other.gameObject.GetComponent<Checkpoint>().checkpointDistance;
 
-                if (other.gameObject.tag == "finished" && isPlayer)
+                if (other.gameObject.tag == "finish" && isPlayer)
                 {
                     isFinished = true;
                     raceManager.Finished();

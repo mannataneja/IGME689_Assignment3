@@ -1,13 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class RaceManager : MonoBehaviour
 {
     [SerializeField] List<DistanceTracker> cars = new List<DistanceTracker>();
     [SerializeField] List<DistanceTracker> rankedCars = new List<DistanceTracker>();
+    [SerializeField] DistanceTracker playerDistanceTracker;
     [SerializeField] Canvas hud;
     [SerializeField] Canvas endScreen;
+    [SerializeField] TMP_Text finalRank;
 
     private void Start()
     {
@@ -26,5 +29,7 @@ public class RaceManager : MonoBehaviour
     {
         hud.enabled = false;
         endScreen.enabled = true;
+
+        finalRank.text = "You finished with Rank " + playerDistanceTracker.rank;
     }
 }
