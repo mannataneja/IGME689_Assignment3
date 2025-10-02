@@ -5,19 +5,18 @@ public class DistanceTracker : MonoBehaviour
 {
     public float distance;
     public float checkpointDistance;
-    public GameObject checkpoint;
+    public Checkpoint checkpoint;
     public int rank;
     public bool isPlayer;
     public TMP_Text rankText;
     public bool isFinished;
+    public RaceManager raceManager;
 
-    public Canvas endScreen;
     private void Start()
     {
         if (isPlayer)
         {
             isFinished = false;
-            endScreen.enabled = false;
         }
 
     }
@@ -25,13 +24,19 @@ public class DistanceTracker : MonoBehaviour
     {
         if(other.gameObject.tag == "checkpoint")
         {
-            checkpoint = other.gameObject;
-            checkpointDistance = other.gameObject.GetComponent<Checkpoint>().checkpoint;
+            if(checkpoint.checkpointDistance + 1000 == other.gameObject.GetComponent<Checkpoint>().checkpointDistance)
+            {
+                checkpoint = other.gameObject.GetComponent<Checkpoint>();
+                checkpointDistance = other.gameObject.GetComponent<Checkpoint>().checkpointDistance;
+
+                if (other.gameObject.tag == "finished" && isPlayer)
+                {
+                    isFinished = true;
+                    raceManager.Finished();
+                }
+            }
         }
-        if(other.gameObject.tag == "finished" && distance > 180000)
-        {
-            isFinished = true;
-        }
+
     }
     private void Update()
     {
@@ -39,7 +44,6 @@ public class DistanceTracker : MonoBehaviour
         if (isPlayer && !isFinished)
         {
             rankText.text = "Rank: " + rank;
-            endScreen.enabled = true;
         }
     }
 }

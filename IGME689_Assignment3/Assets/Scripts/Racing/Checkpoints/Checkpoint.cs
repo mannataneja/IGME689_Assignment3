@@ -2,5 +2,5 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    public float checkpoint = 1000f;
+    public float checkpointDistance = 1000f;
 }

@@ -6,13 +6,14 @@ public class RaceManager : MonoBehaviour
 {
     [SerializeField] List<DistanceTracker> cars = new List<DistanceTracker>();
     [SerializeField] List<DistanceTracker> rankedCars = new List<DistanceTracker>();
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] Canvas hud;
+    [SerializeField] Canvas endScreen;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        hud.enabled = true;
+        endScreen.enabled = false;
+    }
     void Update()
     {
         rankedCars = cars.OrderByDescending(x => x.distance).ToList();
@@ -20,5 +21,10 @@ public class RaceManager : MonoBehaviour
         {
             car.rank = rankedCars.IndexOf(car) + 1;
         }
+    }
+    public void Finished()
+    {
+        hud.enabled = false;
+        endScreen.enabled = true;
     }
 }
