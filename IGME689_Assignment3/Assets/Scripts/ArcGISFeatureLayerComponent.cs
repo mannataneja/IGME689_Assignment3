@@ -55,12 +55,14 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
     public List<GameObject> FeatureItems = new List<GameObject>();
     public QueryLink WebLink;
     [SerializeField] private SplineContainer splineContainer;
-    private ArcGISMapComponent mapComponent;
+    [SerializeField] private ArcGISMapComponent mapComponent;
+    [SerializeField] private GameObject wallBuilder;
+    [SerializeField] private Wall wall;
 
     private void Start()
     {
         StartCoroutine(nameof(GetFeatures));
-        mapComponent = FindFirstObjectByType<ArcGISMapComponent>();
+        wallBuilder.SetActive(false);
     }
 
     public void CreateLink(string link)
@@ -120,8 +122,8 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
                 coordinates.ToArray();
                 currentFeature.Geometry.Latitude = Convert.ToDouble(coordinate[1]);
                 currentFeature.Geometry.Longitude = Convert.ToDouble(coordinate[0]);
-                Debug.Log("Longitude: " + currentFeature.Geometry.Longitude);
-                Debug.Log("Latitude: " + currentFeature.Geometry.Latitude);
+/*                Debug.Log("Longitude: " + currentFeature.Geometry.Longitude);
+                Debug.Log("Latitude: " + currentFeature.Geometry.Latitude);*/
 
                 // Create new ArcGIS Point and pass the Feature Lat and Long to it
                 var position = new ArcGISPoint(currentFeature.Geometry.Longitude, currentFeature.Geometry.Latitude, spawnHeight, new ArcGISSpatialReference(4326));
@@ -136,5 +138,8 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
                 splineContainer.Splines[0].Add(bezierKnot);
             }
         }
+        wallBuilder.SetActive(true);
+        wall = wallBuilder.GetComponent<Wall>();
+        wall.Build();
     }
 }
