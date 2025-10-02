@@ -56,13 +56,13 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
     public QueryLink WebLink;
     [SerializeField] private SplineContainer splineContainer;
     [SerializeField] private ArcGISMapComponent mapComponent;
-    [SerializeField] private GameObject wallBuilder;
-    [SerializeField] private Wall wall;
+/*    [SerializeField] private GameObject wallBuilder;
+    [SerializeField] private Wall wall;*/
 
     private void Start()
     {
         StartCoroutine(nameof(GetFeatures));
-        wallBuilder.SetActive(false);
+        //wallBuilder.SetActive(false);
     }
 
     public void CreateLink(string link)
@@ -138,8 +138,8 @@ public class ArcGISFeatureLayerComponent : MonoBehaviour
                 splineContainer.Splines[0].Add(bezierKnot);
             }
         }
-        wallBuilder.SetActive(true);
+/*        wallBuilder.SetActive(true);
         wall = wallBuilder.GetComponent<Wall>();
-        wall.Build();
+        wall.Build();*/
     }
 }
