@@ -30,6 +30,6 @@ public class RaceManager : MonoBehaviour
         hud.enabled = false;
         endScreen.enabled = true;
 
-        finalRank.text = "You finished with Rank " + playerDistanceTracker.rank;
+        finalRank.text = "Rank: " + playerDistanceTracker.rank;
     }
 }

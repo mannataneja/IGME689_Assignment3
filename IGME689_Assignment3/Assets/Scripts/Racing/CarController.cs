@@ -3,10 +3,10 @@
 [RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
-    public float acceleration = 10f;
-    public float turnSpeed = 50f;
-    public float maxSpeed = 20f;
-    public float brakeStrength = 20f;
+    [SerializeField] float acceleration = 10f;
+    [SerializeField] float turnSpeed = 50f;
+    [SerializeField] float maxSpeed = 20f;
+    [SerializeField] float brakeStrength = 20f;
 
     private Rigidbody rb;
 
@@ -18,8 +18,8 @@ public class CarController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float move = Input.GetAxis("Vertical");   // W/S
-        float turn = Input.GetAxis("Horizontal"); // A/D
+        float move = Input.GetAxis("Vertical");  
+        float turn = Input.GetAxis("Horizontal"); 
 
         //drive forward/backward
         rb.AddForce(transform.forward * move * acceleration, ForceMode.Acceleration);
@@ -34,7 +34,9 @@ public class CarController : MonoBehaviour
 
         //turn only when moving
         if (Mathf.Abs(move) > 0.1f)
+        {
             transform.Rotate(Vector3.up * turn * turnSpeed * Time.fixedDeltaTime);
+        }
 
         //brake with spacebar
         if (Input.GetKey(KeyCode.Space))
