@@ -5,7 +5,7 @@ public class Speedometer : MonoBehaviour
 {
     [SerializeField] enum SpeedUnit { MetersPerSecond, KilometersPerHour, MilesPerHour }
     [SerializeField] SpeedUnit unit = SpeedUnit.MilesPerHour;
-    [SerializeField] float speed;
+    [SerializeField] public float speed;
     [SerializeField] float convertedSpeed;
     [SerializeField] TMP_Text speedText;
     

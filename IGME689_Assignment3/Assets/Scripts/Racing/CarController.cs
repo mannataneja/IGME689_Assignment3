@@ -7,6 +7,7 @@ public class CarController : MonoBehaviour
     [SerializeField] float turnSpeed = 50f;
     [SerializeField] float maxSpeed = 20f;
     [SerializeField] float brakeStrength = 20f;
+    [SerializeField] Speedometer speedometer;
 
     private Rigidbody rb;
 
@@ -31,12 +32,7 @@ public class CarController : MonoBehaviour
             flatVelocity = flatVelocity.normalized * maxSpeed;
             rb.linearVelocity = new Vector3(flatVelocity.x, rb.linearVelocity.y, flatVelocity.z);
         }
-
-        //turn only when moving
-        if (Mathf.Abs(move) > 0.1f)
-        {
-            transform.Rotate(Vector3.up * turn * turnSpeed * Time.fixedDeltaTime);
-        }
+        transform.Rotate(Vector3.up * turn * turnSpeed * Time.fixedDeltaTime);
 
         //brake with spacebar
         if (Input.GetKey(KeyCode.Space))
